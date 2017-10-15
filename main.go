@@ -58,12 +58,24 @@ func main() {
 		log.Fatalf("Failed to detect text: %v", err)
 	}
 
-	if len(annotations) == 0 {
-		fmt.Println("No text found.")
-	} else {
-		for _, annotation := range annotations {
+	to_parse := annotations[0].Description
+	full_name := utils.Parse_name(to_parse)
 
-			fmt.Printf("%q\n", annotation.Description)
-		}
+	var name string
+	var last_nameP string
+	var last_nameF string
+
+	if len(full_name) == 3 {
+		name = full_name[2]
+		last_nameP = full_name[0]
+		last_nameF = full_name[1]
+	} else if len(full_name) == 2 {
+		name = full_name[1]
+		last_nameP = full_name[0]
+		last_nameF = " "
 	}
+
+	fmt.Println(name)
+	fmt.Println(last_nameP)
+	fmt.Println(last_nameF)
 }

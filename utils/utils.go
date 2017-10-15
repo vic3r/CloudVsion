@@ -2,6 +2,7 @@ package utils
 
 import (
 	pb "google.golang.org/genproto/googleapis/cloud/vision/v1"
+	"strings"
 )
 
 func Has_id(labels []*pb.EntityAnnotation) bool {
@@ -12,3 +13,10 @@ func Has_id(labels []*pb.EntityAnnotation) bool {
 	}
 	return false
 }
+
+func Parse_name(to_parse string) []string {
+	to_parse = strings.Split(to_parse, "NOMBRE\n")[1]
+	to_parse = strings.Split(to_parse, "\nDOMICILIO")[0]
+	return strings.Split(to_parse, "\n")
+}
+
