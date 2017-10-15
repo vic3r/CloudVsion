@@ -9,7 +9,17 @@ import (
 	// Imports the Google Cloud Vision API client package.
 	vision "cloud.google.com/go/vision/apiv1"
 	"golang.org/x/net/context"
+	pb "google.golang.org/genproto/googleapis/cloud/vision/v1"
 )
+
+func has_id(labels []*pb.EntityAnnotation) bool {
+	for _, label := range labels {
+		if label.Description == "identity document" {
+			return true
+		}
+	}
+	return false
+}
 
 func main() {
 
@@ -33,25 +43,20 @@ func main() {
 		log.Fatalf("Failed to read file: %v", err)
 	}
 	defer file.Close()
+
 	image, err := vision.NewImageFromReader(file)
 	if err != nil {
 		log.Fatalf("Failed to create image: %v", err)
 	}
+
 	//Detect the entities that are inside the image (labels)
 	labels, err := client.DetectLabels(ctx, image, nil, 10)
 	if err != nil {
 		log.Fatalf("Failed to detect labels: %v", err)
 	}
 
-	proceed := false
-	for _, label := range labels {
-		fmt.Println(label.Description)
-		if label.Description == "identity document" {
-			proceed = true
-		}
-	}
-
-	if proceed == false {
+	//Detect if labels has an id object
+	if !has_id(labels){
 		log.Fatalf("This is not an identity document")
 	}
 
