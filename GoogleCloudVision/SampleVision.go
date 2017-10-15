@@ -4,6 +4,7 @@ import (
         "fmt"
         "log"
         "os"
+        //"reflect"
 
         // Imports the Google Cloud Vision API client package.
         vision "cloud.google.com/go/vision/apiv1"
@@ -20,7 +21,7 @@ func main() {
         }
 
         // Sets the name of the image file to annotate.
-        filename := "../pictures/ife.JPG"
+        filename := "../pictures/ife2.jpg"
 
         file, err := os.Open(filename)
         if err != nil {
@@ -37,36 +38,29 @@ func main() {
                 log.Fatalf("Failed to detect labels: %v", err)
         }
         
-        fmt.Println("Labels:")
+        proceed := false
         for _, label := range labels {
                 fmt.Println(label.Description)
+                if(label.Description == "identity document") {
+                        proceed = true
+                }
         }
+
+        if proceed == false {
+                log.Fatalf("This is not an identity document")
+        }
+
         annotations, err := client.DetectTexts(ctx, image, nil, 10)
         if err != nil {
                 log.Fatalf("Failed to detect text: %v", err)
-        }
-        faceAnnotations, err := client.DetectFaces(ctx, image, nil, 10)
-        if err != nil {
-                log.Fatalf("failed to detect faces: %v", err)
         }
 
         if len(annotations) == 0 {
                 fmt.Println("No text found.")
         } else {
-                fmt.Println("Text:")
-                for _, annotation := range annotations {
+                for _ , annotation := range annotations {
+
                         fmt.Printf( "%q\n", annotation.Description)
                 }
-        }
-         if len(faceAnnotations) == 0 {
-                fmt.Println("No text found.")
-        } else {
-                fmt.Println("Faces:")
-               for i, annotation := range faceAnnotations {
-                        fmt.Println("Face", i)
-                        fmt.Println("Anger:", annotation.AngerLikelihood)
-                        fmt.Println("Joy:", annotation.JoyLikelihood)
-                        fmt.Println("Surprise:",annotation.SurpriseLikelihood)
-                }
-        }
+        }        
 }
