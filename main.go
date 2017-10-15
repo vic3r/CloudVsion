@@ -6,7 +6,7 @@ import (
 	"os"
 	//"reflect"
 
-	// Imports the Google Cloud Vision API client package.
+	// Imports the Google Cloud Vision API clientt package.
 	vision "cloud.google.com/go/vision/apiv1"
 	"golang.org/x/net/context"
 
