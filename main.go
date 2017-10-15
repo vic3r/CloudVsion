@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 	//"reflect"
@@ -11,6 +10,8 @@ import (
 	"golang.org/x/net/context"
 
 	"CloudVsion/utils"
+	"CloudVsion/parser"
+	"strings"
 )
 
 
@@ -58,24 +59,6 @@ func main() {
 		log.Fatalf("Failed to detect text: %v", err)
 	}
 
-	to_parse := annotations[0].Description
-	full_name := utils.Parse_name(to_parse)
-
-	var name string
-	var last_nameP string
-	var last_nameF string
-
-	if len(full_name) == 3 {
-		name = full_name[2]
-		last_nameP = full_name[0]
-		last_nameF = full_name[1]
-	} else if len(full_name) == 2 {
-		name = full_name[1]
-		last_nameP = full_name[0]
-		last_nameF = " "
-	}
-
-	fmt.Println(name)
-	fmt.Println(last_nameP)
-	fmt.Println(last_nameF)
+	to_parse := strings.ToTitle(annotations[0].Description)
+	parser.Parse_JSON(to_parse)
 }
