@@ -13,15 +13,16 @@ import (
 	//"image/jpeg"
 	//"encoding/base64"
 	//"html/template"
+	"image"
 )
 
 type Image struct {
 	  os.File
 }
 
-func passImage(w http.ResponseWriter, img *image.Image){
-	print(w);
-}
+/*func passImage(w http.ResponseWriter, img *image.Image){
+	print(w, image);
+}*/
 
 
 func main() {
@@ -30,7 +31,7 @@ func main() {
 	})
 
 	router := mux.NewRouter()
-	router.HandleFunc("/Image/{id}", passImage).Methods("POST");
+	//router.HandleFunc("/Image/{id}", passImage).Methods("POST");
 
 
 
