@@ -1,8 +1,8 @@
-#Cloud Vision
+# Cloud Vision
 Google Cloud API allows developers understand and know the content of an image through 
 encapsulating powerful models of machine learning in a simple api.
 
-####About us
+#### About us
 
 We are currently trying to connect the Google Cloud Vision API with another api, 
 this with the goal of reconfiguring the actual text that we obtain from Google. 
