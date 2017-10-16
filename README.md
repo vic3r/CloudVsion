@@ -7,6 +7,9 @@ encapsulating powerful models of machine learning in a simple api.
 We are currently trying to connect the Google Cloud Vision API with another api, 
 this with the goal of reconfiguring the actual text that we obtain from Google. 
 
+* Victor Garcia
+* Jose Luis Vázquez
+
 ### Requirements
 
 * Go
@@ -85,7 +88,7 @@ this with the goal of reconfiguring the actual text that we obtain from Google.
         }
         
         
-###How to deploy
+### How to deploy
 
 1. Run the application with go run -filename and python -filename
 2. Select via args the image that you want to pass
