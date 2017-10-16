@@ -1,16 +1,17 @@
 package main
 
 import (
-	"fmt"
 	"log"
 	"os"
 	//"reflect"
 
-	// Imports the Google Cloud Vision API client package.
+	// Imports the Google Cloud Vision API clientt package.
 	vision "cloud.google.com/go/vision/apiv1"
 	"golang.org/x/net/context"
 
 	"CloudVsion/utils"
+	"CloudVsion/parser"
+	"strings"
 )
 
 
@@ -58,12 +59,6 @@ func main() {
 		log.Fatalf("Failed to detect text: %v", err)
 	}
 
-	if len(annotations) == 0 {
-		fmt.Println("No text found.")
-	} else {
-		for _, annotation := range annotations {
-
-			fmt.Printf("%q\n", annotation.Description)
-		}
-	}
+	to_parse := strings.ToTitle(annotations[0].Description)
+	parser.Parse_JSON(to_parse)
 }

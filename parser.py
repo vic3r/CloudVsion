@@ -1,8 +1,10 @@
 import numpy as np
 import pandas as pd
 import json
+import sys
 
-to_parse = "INSTITUTO FEDES LELECTORAL\nREGISTRO FEDERAL DE ELECTORES\nCREDENCIAL PARA VO AR\nUNIDOS\nNOMBRE\nVAZQUEZ\nESPINOZA\nJOSE LUIS\nDOMICILIO\nAVINDEPENDENCIAL 9 M 25\nCOL MODERNA 85330\nEMPALME ,SON.\nFOLIO 1226042401988 ANO DE REGISTR\nCLAVE DE ELECTOR VZESLS94011226H80\nCURP VAEL940112HSRZSS08\nESTADO 26 MUNICIPIO 060\nEDA\nSEXO s\n2012 :00\nLOCALIDAD 0001 SECCION 1011\nEMISIÓN 2012 VIGENCIA HASTA 2022\nFIRMA\n"
+print("hola")
+to_parse = sys.argv[1]
 full_name = to_parse.split("NOMBRE\n")[1].split("\nDOMICILIO")[0].split("\n")
 sex = to_parse.split("SEXO ")[1].split("\n")[0]
 zip = to_parse.split("DOMICILIO\n")[1].split("\nFOLIO")[0].split("\n")[1].split(" ")[-1]
